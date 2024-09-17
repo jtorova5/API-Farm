@@ -36,6 +36,19 @@ public class AnimalTypesController : ControllerBase
         }
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById([FromRoute] int id)
+    {
+        var animalType = await Context.AnimalTypes.FindAsync(id);
+        if (animalType == null)
+        {
+            return NoContent();
+        } else
+        {
+            return Ok(animalType);
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AnimalType animalType) 
     {
