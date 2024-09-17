@@ -1,4 +1,6 @@
+using API_Farm.Data;
 using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
 
 // env variables
 Env.Load();
@@ -14,6 +16,9 @@ var conectionDB = $"server={host};port={port};database={dbName};uid={userName};p
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseMySql(conectionDB, ServerVersion.Parse("8.0.20-mysql")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
