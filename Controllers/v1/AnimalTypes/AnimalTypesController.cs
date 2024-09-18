@@ -102,11 +102,11 @@ public class AnimalTypesController : ControllerBase
             return NoContent();
         }
 
-        Context.AnimalTypes.Remove(await Context.AnimalTypes.FindAsync(id));
+        Context.AnimalTypes.Remove(entity: await Context.AnimalTypes.FindAsync(id));
         await Context.SaveChangesAsync();
         return Ok("deleted");
     }
-    
+
     private bool checkExistence(int id)
     {
         return Context.AnimalTypes.Any(e => e.Id == id);
